@@ -28,11 +28,20 @@ min_age, max_age = st.sidebar.slider('Age',
                                     max_value = int(df['age'].max()),
                                     value = (int(df['age'].min()), int(df['age'].max())))
 
+filtered_data = df[
+    (df['sex'].isin(gender)) &
+    (df['class'].isin(pclass)) &
+    (df['age'] >= min_age) &
+    (df['age'] <= max_age)
+]
+
 #create a pie chart for gender distribution
 st.subheader("Gender Distribution")
-fig = px.pie(df, names='age', title="Gender Distribution")
+gender_count = filtered_data['sex'].value_counts()
+fig = px.pie(filtered_data, names=gender_count.index, values=gender_count.values,
+     title="Gender Distribution")
 st.plotly_chart(fig)
 
 #create a histogramfor age distribution
-fig = px.histogram(df, x='age', title="Age Distribution", nbins=20)
+fig = px.histogram(filtered_data, x='age', title="Age Distribution", nbins=20)
 st.plotly_chart(fig)
