@@ -38,7 +38,7 @@ filtered_data = df[
 #create a pie chart for gender distribution
 st.subheader("Gender Distribution")
 gender_count = filtered_data['sex'].value_counts()
-fig = px.pie(filtered_data, names=gender_count.index, values=gender_count.values,
+fig = px.pie( names=gender_count.index, values=gender_count.values,
      title="Gender Distribution")
 st.plotly_chart(fig)
 
